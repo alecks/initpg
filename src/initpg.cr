@@ -2,7 +2,7 @@ require "db"
 require "pg"
 require "option_parser"
 
-VERSION = "0.1.0"
+VERSION        = "0.1.0"
 MIGRATIONS_DIR = "migrations"
 
 def throw(ex)
