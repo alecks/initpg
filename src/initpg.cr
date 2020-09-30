@@ -35,12 +35,8 @@ OptionParser.parse do |parser|
     parser.on "-n NAME", "--name=NAME", "Sets the name of the migration" { |n| migration_name = n }
   end
 
-  parser.invalid_option do |flag|
-    throw "#{flag} is not a valid option.\n\n#{parser}"
-  end
-  parser.missing_option do |flag|
-    throw "#{flag} is missing an option.\n\n#{parser}"
-  end
+  parser.invalid_option { |flag| throw "#{flag} is not a valid option.\n\n#{parser}" }
+  parser.missing_option { |flag| throw "#{flag} is missing an option.\n\n#{parser}" }
 end
 
 begin
@@ -48,9 +44,7 @@ begin
     path = Path.new MIGRATIONS_DIR, "#{migration_name}_#{Time.utc}"
     Dir.mkdir_p path unless File.exists? path
 
-    ["up", "down"].each do |name|
-      File.write Path.new(path, "#{name}.sql"), "-- InitPG"
-    end
+    ["up", "down"].each { |name| File.write Path.new(path, "#{name}.sql"), "-- InitPG" }
   end
 rescue ex
   throw ex
