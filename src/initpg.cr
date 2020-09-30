@@ -45,7 +45,7 @@ end
 
 begin
   if create
-    path = Path.new(MIGRATIONS_DIR, "#{migration_name}_#{Time.utc}")
+    path = Path.new MIGRATIONS_DIR, "#{migration_name}_#{Time.utc}"
     Dir.mkdir_p path unless File.exists? path
 
     ["up", "down"].each do |name|
